@@ -88,7 +88,7 @@ class Container
     {
         if ($this->hasPrev()) {
             $prevSlug = $this->get($this->currentIndex - 1, false);
-            return $prevSlug::$slug;
+            return $prevSlug->slug;
         }
         return null;
     }
@@ -121,7 +121,7 @@ class Container
     {
         if ($this->hasNext()) {
             $nextStep = $this->get($this->currentIndex + 1, false);
-            return $nextStep::$slug;
+            return $nextStep->slug;
         }
         return null;
     }
