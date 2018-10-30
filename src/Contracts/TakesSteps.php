@@ -9,8 +9,6 @@ trait TakesSteps
 {
 	protected $wizard = null;
 	
-	protected $steps = [];
-	
 	public function wizard(Container $wizard, $step = null)
 	{
 		$this->wizard = $this->wizard ?: $wizard;
