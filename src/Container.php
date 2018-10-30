@@ -37,7 +37,7 @@ class Container
             $naturalNumber++;
         }
 
-        $this->sessionKeyName = self::SESSION_NAME;
+        $this->sessionKeyName = config('wizard.storage.key');
         if (function_exists('view')) {
             view()->share(['wizard' => $this]);
         }
@@ -179,15 +179,17 @@ class Container
 
     public function data($data = null): array
     {
+	    $method = config('wizard.storage.method');
+	    
         $default = [];
-        if (!function_exists('session')) {
+        if (!function_exists($method)) {
             return $default;
         }
         if (is_array($data)) {
             $data['lastProcessed'] = $this->currentIndex;
-            session([$this->sessionKeyName => $data]);
+            $method([$this->sessionKeyName => $data]);
         }
-        return session($this->sessionKeyName, $default);
+        return $method($this->sessionKeyName, $default);
     }
 
     public function dataHas($key): bool

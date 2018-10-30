@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 trait TakesSteps
 {
-	protected $defaultView = 'wizard';
-	
 	protected $wizard = null;
+	
+	protected $steps = [];
 	
 	public function wizard(Container $wizard, $step = null)
 	{
@@ -26,7 +26,7 @@ trait TakesSteps
 	        abort(404);
 	    }
 	
-	    return view($this->defaultView, compact('step'));
+	    return view(config('wizard.view'), compact('step'));
 	}
 	
 	public function wizardPost(Container $wizard, Request $request, $step = null)
@@ -43,7 +43,7 @@ trait TakesSteps
 	    $this->validate($request, $step->rules($request));
 	    $step->process($request);
 	
-	    return redirect()->route('wizard.post', [$this->wizard->nextSlug()]);
+	    return redirect()->route(config('wizard.routes.post'), [$this->wizard->nextSlug()]);
 	}
 	
 }
