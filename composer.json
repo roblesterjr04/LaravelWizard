@@ -20,5 +20,12 @@
     "psr-4": {
       "Lester\\LaravelWizard\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Lester\\LaravelWizard\\ServiceProvider"
+      ]
+    }
   }
 }
