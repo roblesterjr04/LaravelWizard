@@ -15,11 +15,16 @@ class Container
     /**
      * @throws StepNotFoundException
      */
-    public function __construct(array $steps = [], string $sessionKeyName = 'wizard')
+    public function __construct()
     {
-	    $steps = $steps ?: $this->steps;
 	    
-        if (empty($steps)) {
+    }
+    
+    public function initWithSteps($steps)
+    {
+	    $this->steps = $steps;
+	    
+	    if (empty($steps)) {
             throw new StepNotFoundException();
         }
 
@@ -32,10 +37,11 @@ class Container
             $naturalNumber++;
         }
 
-        $this->sessionKeyName = self::SESSION_NAME . '.' . $sessionKeyName;
+        $this->sessionKeyName = self::SESSION_NAME;
         if (function_exists('view')) {
             view()->share(['wizard' => $this]);
         }
+	    return $this;
     }
 
     protected function createStepClass($stepClassName, int $naturalNumber, $key, int $index): Step
