@@ -3,6 +3,7 @@
 namespace Lester\LaravelWizard\Contracts;
 
 use Lester\LaravelWizard\Container;
+use Illuminate\Http\Request;
 
 trait TakesSteps
 {
