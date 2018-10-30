@@ -15,8 +15,10 @@ class Container
     /**
      * @throws StepNotFoundException
      */
-    public function __construct(array $steps, string $sessionKeyName = 'wizard')
+    public function __construct(array $steps = [], string $sessionKeyName = 'wizard')
     {
+	    $steps = $steps ?: $this->steps;
+	    
         if (empty($steps)) {
             throw new StepNotFoundException();
         }
