@@ -26,7 +26,7 @@ abstract class Step
     public $index;
     protected $wizard;
 
-    public function __construct(int $number, $key, int $index, Wizard $wizard)
+    public function __construct(int $number, $key, int $index, Container $wizard)
     {
         $this->number = $number;
         $this->key = $key;
