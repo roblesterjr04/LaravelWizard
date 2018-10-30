@@ -2,12 +2,20 @@
 
 namespace Lester\LaravelWizard;
 
+use Lester\LaravelWizard\Console\StepMakeCommand;
+
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 	const CONFIG_PATH = __DIR__ . '/../config/config.php';
 	
 	public function boot()
 	{
+		if ($this->app->runningInConsole()) {
+	        $this->commands([
+	            StepMakeCommand::class,
+	        ]);
+	    }
+    
 		$this->publishes([
 			self::CONFIG_PATH => config_path('wizard.php'),
 		], 'config');

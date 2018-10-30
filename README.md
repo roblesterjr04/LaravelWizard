@@ -22,6 +22,30 @@ laravel ^5.5
 $ composer require rob-lester-jr04/laravel-wizard
 ```
 
+*Optional:*
+
+Copy the config file to your config directory.
+
+```bash
+$ php artisan vendor:publish --provider="Lester\LaravelWizard\ServiceProvider" --tag=config
+```
+
+```php
+'view' => 'wizard',
+	
+'routing' => [
+	'get'		=> 'wizard',
+	'post'		=> 'wizard.post'
+],
+	
+'storage' => [
+	'key'		=> 'wizard',
+	'method'	=> 'session'
+]
+```
+
+## Example/How
+
 #### Create a controller
 
 ```bash
@@ -30,7 +54,7 @@ $ php artisan make:controller WizardController
 
 We used `WizardController` as an example, you can choose what you need to for your project.
 
-#### Include the wizard trait on the controller
+#### Include the contract on the controller
 
 ```php
 <?php
@@ -48,11 +72,11 @@ class WizardController extends Controller
 }
 ```
 
+#### Create Step
 
-
-## Example/How
-
-Still under development..........
+```bash
+$ php artisan make:step MyFirstStep
+```
 
 ## License
 

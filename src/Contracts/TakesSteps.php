@@ -12,7 +12,7 @@ trait TakesSteps
 	public function wizard(Container $wizard, $step = null)
 	{
 		$this->wizard = $this->wizard ?: $wizard;
-		$this->wizard->initWithSteps($this->steps);
+		$this->wizard->initWithSteps($this->steps ?: config('wizard.steps'));
 		
 	    try {
 	        if (is_null($step)) {
@@ -30,7 +30,7 @@ trait TakesSteps
 	public function wizardPost(Container $wizard, Request $request, $step = null)
 	{
 		$this->wizard = $this->wizard ?: $wizard;
-		$this->wizard->initWithSteps($this->steps);
+		$this->wizard->initWithSteps($this->steps ?: config('wizard.steps'));
 		
 	    try {
 	        $step = $this->wizard->getBySlug($step);

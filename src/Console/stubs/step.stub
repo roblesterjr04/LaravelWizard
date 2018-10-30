@@ -1,0 +1,21 @@
+<?php
+	
+namespace DummyNamespace;
+
+use Lester\LaravelWizard\Step;
+use Illuminate\Http\Request;
+
+class DummyClass extends Step
+{
+
+    public $label = 'DummyClass';
+    public $slug = 'DummyClass';
+    public $view = 'wizard.DummyClass';
+
+    public function process(Request $request)
+    {
+        
+        $this->saveProgress($request);
+        
+    }
+}
