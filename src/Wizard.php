@@ -1,8 +1,8 @@
 <?php
 
-namespace Smajti1\Laravel;
+namespace Lester\LaravelWizard;
 
-use Smajti1\Laravel\Exceptions\StepNotFoundException;
+use Lester\LaravelWizard\Exceptions\StepNotFoundException;
 
 class Wizard
 {
@@ -125,7 +125,7 @@ class Wizard
     {
         $index = 0;
         foreach ($this->steps as $key => $step) {
-            if ($step::$slug == $slug) {
+            if ($step->slug == $slug) {
                 $this->currentIndex = $index;
                 return $step;
             }
@@ -197,7 +197,7 @@ class Wizard
     public function dataStep(Step $step, $key): array
     {
         $data = $this->data();
-        $stepData = $data[$step::$slug][$key] ?? [];
+        $stepData = $data[$step->slug][$key] ?? [];
         return $stepData;
     }
 

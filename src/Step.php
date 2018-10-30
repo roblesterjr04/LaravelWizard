@@ -1,6 +1,6 @@
 <?php
 
-namespace Smajti1\Laravel;
+namespace Lester\LaravelWizard;
 
 use Illuminate\Http\Request;
 
@@ -10,17 +10,17 @@ abstract class Step
     /**
      * @deprecated since 1.1.0 $label will be no more static
      */
-    public static $label;
+    public $label;
 
     /**
      * @deprecated from 1.1.0 $slug will be no more static
      */
-    public static $slug;
+    public $slug;
 
     /**
      * @deprecated from 1.1.0 $view will be no more static
      */
-    public static $view;
+    public $view;
     public $number;
     public $key;
     public $index;
@@ -44,10 +44,20 @@ abstract class Step
     public function saveProgress(Request $request, array $additionalData = [])
     {
         $wizardData = $this->wizard->data();
-        $wizardData[$this::$slug] = $request->except('step', '_token');
+        $wizardData[$this->slug] = $request->except('step', '_token');
         $wizardData = array_merge($wizardData, $additionalData);
 
         $this->wizard->data($wizardData);
+    }
+    
+    public function data($key = null)
+    {
+	    $wizardData = $this->wizard->data();
+	    $stepData = isset($wizardData[$this->slug]) ? $wizardData[$this->slug] : [];
+	    
+	    if ($key === null) return $wizardData[$this->slug];
+	    
+	    return isset($stepData[$key]) ? $stepData[$key] : false;
     }
 
 }
