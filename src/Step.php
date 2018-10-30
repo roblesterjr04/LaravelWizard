@@ -53,7 +53,7 @@ abstract class Step
     public function data($key = null)
     {
 	    $wizardData = $this->wizard->data();
-	    $stepData = isset($wizardData[$this->slug]) ? $wizardData[$this->slug] : [];
+	    $stepData = isset($wizardData[$this->slug]) ? collect($wizardData[$this->slug]) : collect([]);
 	    
 	    if ($key === null) return $wizardData[$this->slug];
 	    

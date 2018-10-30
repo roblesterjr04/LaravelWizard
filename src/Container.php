@@ -177,17 +177,17 @@ class Container
         return null;
     }
 
-    public function data($data = null): array
+    public function data($data = null)
     {
 	    $method = config('wizard.storage.method');
 	    
-        $default = [];
+        $default = collect([]);
         if (!function_exists($method)) {
             return $default;
         }
         if (is_array($data)) {
             $data['lastProcessed'] = $this->currentIndex;
-            $method([$this->sessionKeyName => $data]);
+            collect($method([$this->sessionKeyName => $data]));
         }
         return $method($this->sessionKeyName, $default);
     }
@@ -211,9 +211,9 @@ class Container
         return $stepData;
     }
 
-    public function all(): array
+    public function all()
     {
-        return $this->steps;
+        return collect($this->steps);
     }
 
 }
