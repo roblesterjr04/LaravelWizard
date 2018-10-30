@@ -41,7 +41,7 @@ trait TakesSteps
 	    $this->validate($request, $step->rules($request));
 	    $step->process($request);
 	
-	    return redirect()->route(config('wizard.routes.post'), [$this->wizard->nextSlug()]);
+	    return redirect()->route(config('wizard.routes.get'), [$this->wizard->nextSlug()]);
 	}
 	
 }
