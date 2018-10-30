@@ -2,12 +2,18 @@
 	
 namespace Lester\LaravelWizard\Contracts;
 
+use Lester\LaravelWizard\Container;
+
 trait TakesSteps
 {
 	protected $defaultView = 'wizard';
 	
-	public function wizard($step = null)
+	protected $wizard = null;
+	
+	public function wizard(Container $wizard, $step = null)
 	{
+		$this->wizard = $this->wizard ?: $wizard;
+		
 	    try {
 	        if (is_null($step)) {
 	            $step = $this->wizard->firstOrLastProcessed();
@@ -21,8 +27,10 @@ trait TakesSteps
 	    return view($this->defaultView, compact('step'));
 	}
 	
-	public function wizardPost(Request $request, $step = null)
+	public function wizardPost(Container $wizard, Request $request, $step = null)
 	{
+		$this->wizard = $this->wizard ?: $wizard;
+		
 	    try {
 	        $step = $this->wizard->getBySlug($step);
 	    } catch (StepNotFoundException $e) {

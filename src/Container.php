@@ -4,10 +4,10 @@ namespace Lester\LaravelWizard;
 
 use Lester\LaravelWizard\Exceptions\StepNotFoundException;
 
-class Wizard
+class Container
 {
 
-    const SESSION_NAME = 'smajti1.wizard';
+    const SESSION_NAME = 'wizard';
     protected $steps = [];
     protected $currentIndex = -1;
     protected $sessionKeyName = '';
@@ -15,7 +15,7 @@ class Wizard
     /**
      * @throws StepNotFoundException
      */
-    public function __construct(array $steps, string $sessionKeyName = '')
+    public function __construct(array $steps, string $sessionKeyName = 'wizard')
     {
         if (empty($steps)) {
             throw new StepNotFoundException();
